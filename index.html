@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ASTRAWATCH — Launch Window + Ascent Intelligence</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="stars"></div><div class="nebula a"></div><div class="nebula b"></div>
+
+<header class="topbar">
+<div class="brand">
+<div class="orbit-logo"><span></span></div>
+<div><b>ASTRA<span>WATCH</span></b><small>LAUNCH WINDOW + ASCENT INTELLIGENCE</small></div>
+</div>
+<div class="live"><i></i> LIVE DATA + MISSION MODEL</div>
+</header>
+
+<main>
+<section class="hero">
+<div>
+<p class="eyebrow">MISSION PLANNER / PUBLIC VIEW</p>
+<h1>Watch the window.<br><em>Understand the ascent.</em></h1>
+<p>Explore when a launch can happen, how the vehicle reaches its target orbit, where people may have the best view, and how weather can affect the mission.</p>
+</div>
+<div class="hero-space"><div class="planet"></div><div class="orb o1"></div><div class="orb o2"></div><div class="sat">◆</div></div>
+</section>
+
+<section class="controls glass">
+<div><label>TARGET ORBIT</label>
+<select id="orbit"><option value="LEO">LEO · 45.1° demo inclination</option><option value="POLAR">POLAR · 89.0° demo inclination</option><option value="SSO" selected>SSO · 98.1° demo inclination</option></select>
+</div>
+<div><label>WHAT-IF LAUNCH DELAY</label><input id="delay" type="range" min="0" max="30" value="0"><div class="range"><span>0 min</span><b id="delayVal">0 min</b><span>30 min</span></div></div>
+<button id="reset">RESET</button>
+</section>
+
+<section class="top-grid">
+<article class="glass countdown-card">
+<label>NEXT AVAILABLE WINDOW</label><div class="chip" id="chip">SSO · 98.1°</div>
+<div class="countdown" id="countdown">18:42</div><small class="muted">UNTIL WINDOW OPENS</small>
+<div class="stats"><div><small>WINDOW</small><b id="window">14:32–14:36</b></div><div><small>DURATION</small><b id="duration">4 min</b></div><div><small>INJECTION</small><b id="injection">14:41</b></div></div>
+<div class="bar"><i id="bar"></i></div>
+</article>
+
+<article class="glass weather">
+<div class="head"><label>WEATHER IMPACT</label><span id="weatherBadge" class="badge green">GREEN</span></div>
+<div class="weather-main"><span id="weatherIcon">☁</span><div><strong id="weatherTemp">—</strong><small>Live demo launch-site conditions</small></div></div>
+<div class="weather-grid"><div>WIND<b id="wind">—</b></div><div>CLOUD<b id="cloud">—</b></div><div>RAIN<b id="rain">—</b></div><div>PRESSURE<b id="pressure">—</b></div></div>
+<p id="weatherText">Fetching live launch-site weather…</p><small id="weatherUpdated" class="source-line">LIVE WEATHER · Open-Meteo</small>
+</article>
+
+<article class="glass vehicle">
+<div class="head"><label>VEHICLE DURATION</label><span class="badge purple">ADVANCED</span></div>
+<div class="big-time" id="vehicle">8:50 <small>to injection</small></div>
+<div class="stages"><span class="done">01<br><small>LIFTOFF</small></span><i></i><span class="done">02<br><small>SEPARATION</small></span><i></i><span class="active">03<br><small>INJECTION</small></span></div>
+<p>This prototype evaluates the <b>injection moment</b>, not only the liftoff timestamp.</p>
+</article>
+</section>
+
+<section class="live-strip">
+<article class="glass live-sat">
+<div class="head"><label>LIVE ORBITAL REFERENCE</label><span id="satBadge" class="badge yellow">LOADING</span></div>
+<div class="sat-title"><div><strong id="satName">ISS (ZARYA)</strong><small id="satStatus">Waiting for orbital data…</small></div><span class="sat-orbit">SGP4</span></div>
+<div class="sat-stats"><div>ALTITUDE<b id="issAlt">—</b></div><div>LATITUDE<b id="issLat">—</b></div><div>LONGITUDE<b id="issLon">—</b></div></div>
+<div class="sat-footer"><span id="issTime">—</span><span id="satSource">CelesTrak</span></div>
+</article>
+<article class="glass data-legend">
+<p class="eyebrow">DATA INTEGRITY</p><h2>No fake “LIVE” labels.</h2>
+<div class="legend-row"><span class="badge green">LIVE</span><span>Weather + ISS orbital position</span></div>
+<div class="legend-row"><span class="badge purple">CALCULATED</span><span>Prototype launch-window timing</span></div>
+<div class="legend-row"><span class="badge yellow">MODELLED</span><span>Vehicle duration + viewing estimate</span></div>
+</article>
+</section>
+
+<section class="visual-grid">
+<article class="glass visual">
+<div class="section-head"><div><p class="eyebrow">LIVE-STYLE VISUALIZATION</p><h2>Ascent trajectory</h2></div>
+<div class="telemetry">ALT <b id="alt">0 km</b> &nbsp; LAT <b id="lat">28.5°</b> &nbsp; LON <b id="lon">−80.6°</b></div></div>
+<div class="space-stage">
+<div class="earth"><i></i><i></i><i></i></div>
+<svg viewBox="0 0 900 500" preserveAspectRatio="none">
+<defs><linearGradient id="g"><stop stop-color="#74f7d0"/><stop offset="1" stop-color="#a77cff"/></linearGradient></defs>
+<path class="glow" d="M95 430 C170 355 190 260 300 210 C420 155 530 120 680 55"/>
+<path class="path" d="M95 430 C170 355 190 260 300 210 C420 155 530 120 680 55"/>
+<circle id="dot" cx="95" cy="430" r="7"/><circle id="dotGlow" cx="95" cy="430" r="18"/>
+<text x="30" y="480">LAUNCH SITE</text><text x="650" y="38">TARGET ORBIT</text>
+</svg>
+<div class="timeline-control">T+ <b id="missionTime">00:00</b><input id="mission" type="range" min="0" max="530" value="0"><strong id="phase">LIFTOFF</strong></div>
+</div>
+</article>
+
+<article class="glass mission">
+<p class="eyebrow">MISSION STORY</p><h2>What happens next?</h2>
+<div class="timeline">
+<div class="active"><i></i><b>T−10 min</b><span>Weather & launch-window check</span></div>
+<div><i></i><b>T+00:00</b><span>Liftoff from launch site</span></div>
+<div><i></i><b>T+02:10</b><span>Early ascent / stage event</span></div>
+<div><i></i><b>T+08:50</b><span>Target orbit injection</span></div>
+</div>
+<div class="comms">⌁ <div><small>GROUND COMMUNICATION</small><b id="comms">CONNECTED</b><span>Line-of-sight simulation active</span></div></div>
+</article>
+</section>
+
+<section class="advanced">
+<article class="glass map-card">
+<div class="section-head"><div><p class="eyebrow">ADVANCED BONUS</p><h2>Viewing map</h2></div><small>● best view &nbsp; ● possible</small></div>
+<div class="map">
+<div class="grid"></div><div class="land n"></div><div class="land s"></div><div class="land eu"></div><div class="land as"></div>
+<div class="zone best"></div><div class="zone fair"></div><div class="pin">●<b>LAUNCH</b></div>
+<div class="map-label one">BEST VIEWING<br><b>COASTAL REGION</b></div><div class="map-label two">GOOD VISIBILITY</div><div id="issPin" class="iss-pin">●</div><div id="issMapLabel" class="iss-label">ISS · waiting…</div>
+<div class="map-note">Approximate public viewing geometry — schematic, not an operational prediction.</div>
+</div>
+<div class="view-stats"><div>BEST REGION<b>North Atlantic coast</b></div><div>MAX ELEVATION<b id="elev">42°</b></div><div>VIEW DURATION<b id="view">3m 20s</b></div></div>
+</article>
+
+<article class="glass why">
+<p class="eyebrow">DECISION SUPPORT</p><h2>Why this window?</h2>
+<div class="factor">◎ <div><b>Orbital alignment</b><small id="align">Target inclination is compatible with this demonstration launch profile.</small></div><strong>GOOD</strong></div>
+<div class="factor">↗ <div><b>Vehicle duration</b><small>Injection occurs after ascent, so the mission timeline includes vehicle duration.</small></div><strong>INCLUDED</strong></div>
+<div class="factor">☁ <div><b>Weather</b><small>Low precipitation and moderate wind in this simulation.</small></div><strong>GOOD</strong></div>
+<div class="whatif"><div><b>WHAT-IF MODE</b><small id="what">No launch delay applied.</small></div><button id="whatBtn">SIMULATE +10 MIN</button></div>
+</article>
+</section>
+
+<section class="feature-strip">
+<div><b>01 WINDOW</b><small>Countdown + duration</small></div><div><b>02 ASCENT</b><small>Trajectory + telemetry</small></div><div><b>03 WEATHER</b><small>Green / Yellow / Red</small></div><div><b>04 VEHICLE</b><small>Injection-aware timing</small></div><div><b>05 VIEWING</b><small>Best public regions</small></div>
+</section>
+
+<footer>ASTRAWATCH · HACKATHON PROTOTYPE <span>Educational simulation — not operational launch guidance.</span></footer>
+</main>
+<script type="importmap">{"imports":{"satellite.js":"https://cdn.jsdelivr.net/npm/satellite.js@7.1.0/+esm"}}</script>
+<script type="module">import * as satellite from "satellite.js"; window.satellite=satellite; await import("./app.js");</script>
+</body>
